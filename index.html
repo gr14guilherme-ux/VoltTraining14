@@ -869,9 +869,10 @@ function updateClientHero(){
   document.getElementById('c-date').textContent=now.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).replace(/^\w/,c=>c.toUpperCase());
 }
 function renderWeekPills(){
-  const cur=getCurrentWeekIdx();
-  document.getElementById('c-week-pills').innerHTML=(appData.weeks||[]).map((w,i)=>`
-    <button class="w-pill ${i===cur?'is-current':''} ${i===clientWeek?'active':''}" onclick="cSelectWeek(${i})">${esc(w.label)}${i===cur?' ★':''}</button>`).join('');
+  // Solo muestra la semana asignada al cliente, sin navegación a otras
+  const w=appData.weeks[clientWeek]||{};
+  document.getElementById('c-week-pills').innerHTML=`
+    <span class="w-pill active" style="cursor:default">${esc(w.label)}${w.title?' — '+esc(w.title):''}</span>`;
 }
 function renderDayStrip(){
   const week=appData.weeks[clientWeek];
