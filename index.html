@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script>
-  const firebaseConfig = {
+  window.FIREBASE_CONFIG = {
   apiKey: "AIzaSyDrE7yfWyFDlDynApnBgJwuY3vm-m2JlEo",
   authDomain: "gr14-b5ae9.firebaseapp.com",
   databaseURL: "https://gr14-b5ae9-default-rtdb.europe-west1.firebasedatabase.app",
@@ -17,7 +17,7 @@
   appId: "1:170308871765:web:a56ce67d0605fbe495d6dc",
   measurementId: "G-QN98P7B14Z"
 };
-  const ADMIN_PASSWORD = "admin123";
+window.ADMIN_PASSWORD = "admin123";
 </script>
 
 <style>
@@ -482,7 +482,7 @@ function hideLoading() {
 }
 
 // ── INIT ─────────────────────────────────────
-const cfg = FIREBASE_CONFIG;
+const cfg = window.FIREBASE_CONFIG;
 if (!cfg.apiKey || cfg.apiKey === 'TU_API_KEY') {
   hideLoading(); show('setup-screen');
 } else {
@@ -535,7 +535,7 @@ if (!cfg.apiKey || cfg.apiKey === 'TU_API_KEY') {
 // ── ADMIN AUTH ────────────────────────────────
 window.checkPw = function() {
   const val = document.getElementById('pw-input').value;
-  if (val === ADMIN_PASSWORD) {
+  if (val === window.ADMIN_PASSWORD) {
     show('admin-screen'); renderAdmin();
   } else {
     document.getElementById('pw-error').classList.remove('hidden');
