@@ -1004,12 +1004,6 @@ function ytId(url){if(!url)return'';const m1=url.match(/youtu\.be\/([^?&\s]+)/);
 let toastTimer;
 window.toast=function(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2500);};
 function toast(msg){window.toast(msg);}
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js') // <-- El ./ es clave
-      .then(() => console.log("App lista"))
-      .catch((err) => console.log("Error:", err));
-  }
 </script>
 </body>
 </html>
