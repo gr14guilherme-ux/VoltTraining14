@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TrainFlow</title>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#08080f">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script>
@@ -1001,6 +1004,10 @@ function ytId(url){if(!url)return'';const m1=url.match(/youtu\.be\/([^?&\s]+)/);
 let toastTimer;
 window.toast=function(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2500);};
 function toast(msg){window.toast(msg);}
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
 </script>
 </body>
 </html>
