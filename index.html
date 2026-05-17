@@ -50,6 +50,51 @@ label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-wei
 .field{margin-bottom:14px;}
 .tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:99px;background:var(--accent);color:#000;font-weight:500;}
 .chip{font-size:11px;font-family:'DM Mono',monospace;background:var(--s3);border:1px solid var(--border);padding:2px 8px;border-radius:5px;color:var(--muted);white-space:nowrap;}
+
+/* ── BIBLIOTECA SEARCH & FILTER ── */
+.lib-search-bar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center;}
+.lib-search-input{flex:1;min-width:180px;padding:9px 14px;font-size:13px;}
+.lib-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.lib-cat-btn{padding:5px 13px;border-radius:99px;font-size:11px;font-weight:500;background:var(--s2);border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .15s;}
+.lib-cat-btn:hover{color:var(--text);border-color:var(--border2);}
+.lib-cat-btn.active{background:var(--accent);color:#000;border-color:var(--accent);}
+.lib-empty{color:var(--muted);font-size:14px;padding:20px 0;}
+
+/* ── HISTORIAL ── */
+#historial-panel{padding:24px;overflow-y:auto;max-height:calc(100vh - 57px);flex:1;}
+.hist-header{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+.hist-header h2{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:.06em;}
+.hist-sub{color:var(--muted);font-size:13px;margin-bottom:22px;}
+.hist-client-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r2);margin-bottom:12px;overflow:hidden;}
+.hist-client-top{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;}
+.hist-client-top:hover{background:var(--s2);}
+.hist-avatar-sm{width:36px;height:36px;border-radius:99px;background:var(--accent-dim);border:1px solid rgba(0,229,160,.2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.hist-client-info{flex:1;}
+.hist-client-name{font-weight:600;font-size:14px;}
+.hist-client-email{font-size:11px;color:var(--muted);}
+.hist-global-pct{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--accent);}
+.hist-chevron{color:var(--muted);font-size:14px;transition:transform .2s;}
+.hist-client-card.open .hist-chevron{transform:rotate(180deg);}
+.hist-detail{display:none;border-top:1px solid var(--border);padding:16px 18px;}
+.hist-client-card.open .hist-detail{display:block;}
+.hist-week-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted2);margin-bottom:10px;margin-top:14px;}
+.hist-week-title:first-child{margin-top:0;}
+.hist-day-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.hist-day-name{font-size:12px;color:var(--muted);width:90px;flex-shrink:0;}
+.hist-day-track{flex:1;height:6px;background:var(--border);border-radius:99px;overflow:hidden;}
+.hist-day-fill{height:100%;background:var(--accent);border-radius:99px;}
+.hist-day-pct{font-size:11px;font-family:'DM Mono';color:var(--text);min-width:36px;text-align:right;}
+.hist-no-data{font-size:13px;color:var(--muted2);padding:8px 0;}
+
+/* ── AVATARES ── */
+.avatar-btn{background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;gap:8px;}
+.avatar-bubble{width:34px;height:34px;border-radius:99px;background:var(--accent-dim);border:1px solid rgba(0,229,160,.2);display:flex;align-items:center;justify-content:center;font-size:18px;transition:transform .15s;}
+.avatar-btn:hover .avatar-bubble{transform:scale(1.12);}
+.avatar-modal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px;}
+.avatar-opt{width:100%;aspect-ratio:1;border-radius:12px;background:var(--s2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:all .15s;}
+.avatar-opt:hover{border-color:var(--accent);background:var(--accent-dim);transform:scale(1.06);}
+.avatar-opt.selected{border-color:var(--accent);background:var(--accent-dim);}
+
 /* LOADING */
 #loading-screen{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity .4s;}
 .loader-logo{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:.1em;color:var(--accent);animation:pulse 1.6s ease-in-out infinite;}
@@ -396,6 +441,7 @@ label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-wei
       <button class="admin-nav-btn"        id="nav-biblioteca" onclick="adminTab('biblioteca')">Biblioteca</button>
       <button class="admin-nav-btn"        id="nav-clientes"   onclick="adminTab('clientes')">Clientes</button>
       <button class="admin-nav-btn"        id="nav-dieta"      onclick="adminTab('dieta')">Dieta</button>
+      <button class="admin-nav-btn"        id="nav-historial"  onclick="adminTab('historial')">Historial</button>
     </div>
     <button class="btn btn-accent" onclick="saveAll()">Guardar</button>
   </div>
@@ -423,6 +469,10 @@ label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-wei
         <h2>Biblioteca de vídeos</h2>
         <span class="tag" id="lib-count-tag">0 vídeos</span>
       </div>
+      <div class="lib-search-bar">
+        <input class="lib-search-input" type="text" id="lib-search" placeholder="🔍 Buscar por nombre..." oninput="filterLibrary()">
+      </div>
+      <div class="lib-cats" id="lib-cats"></div>
       <div class="lib-add-form">
         <h3>Añadir vídeo</h3>
         <div class="lib-form-grid">
@@ -455,8 +505,16 @@ label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-wei
         <div id="nc-error" class="pw-error hidden" style="margin-top:8px"></div>
       </div>
     </div>
-  </div>
-</div>
+
+    <!-- HISTORIAL -->
+    <div id="historial-panel" class="hidden">
+      <div class="hist-header">
+        <h2>Historial de entrenos</h2>
+        <span class="tag" id="hist-tag">0 clientes</span>
+      </div>
+      <p class="hist-sub">Aquí ves el porcentaje de ejercicios completados por cada cliente en cada día.</p>
+      <div id="hist-list"></div>
+    </div>
 
     <!-- DIETA -->
     <div id="diet-panel" class="hidden">
@@ -469,12 +527,18 @@ label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-wei
       <div id="diet-day-body"></div>
     </div>
 
+  </div>
+</div>
+
 <!-- CLIENT SCREEN -->
 <div id="client-screen" class="hidden">
   <div class="client-topbar">
     <div class="client-topbar-logo">TRAINFLOW</div>
     <div class="client-user-info">
-      <span class="client-username" id="c-username"></span>
+      <button class="avatar-btn" onclick="openAvatarModal()" id="avatar-btn">
+        <div class="avatar-bubble" id="c-avatar">😊</div>
+        <span class="client-username" id="c-username"></span>
+      </button>
       <button class="btn-logout" onclick="clientLogout()">Salir</button>
     </div>
   </div>
@@ -511,6 +575,15 @@ label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px;font-wei
     <div id="lib-modal-list"></div>
     <br>
     <button class="btn btn-ghost" style="width:100%" onclick="closeLibModal()">Cancelar</button>
+  </div>
+</div>
+<div class="modal-overlay hidden" id="avatar-modal" onclick="if(event.target===this)closeAvatarModal()">
+  <div class="modal-box">
+    <h3>Elige tu avatar</h3>
+    <p style="color:var(--muted);font-size:13px;margin-top:-8px">Pulsa uno para seleccionarlo</p>
+    <div class="avatar-modal-grid" id="avatar-grid"></div>
+    <br>
+    <button class="btn btn-ghost" style="width:100%" onclick="closeAvatarModal()">Cerrar</button>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -587,6 +660,10 @@ if (!cfg.apiKey || cfg.apiKey === 'TU_API_KEY') {
           clientWeek = cd.weekIdx || 0;
           clientDay  = getTodayDayIdx();
           document.getElementById('c-username').textContent = cd.name;
+          // Load saved avatar
+          const savedAvatar = cd.avatar || '😊';
+          const ab = document.getElementById('c-avatar');
+          if (ab) ab.textContent = savedAvatar;
           show('client-screen');
           renderClientFull();
         } else {
@@ -645,7 +722,7 @@ function scheduleSave() {
 window.saveAll = function() { set(dataRef, appData).then(() => toast('✅ Guardado en la nube')).catch(() => toast('❌ Error')); };
 // ── ADMIN TABS ────────────────────────────────
 window.adminTab = function(tab) {
-  ['rutinas','biblioteca','clientes','dieta'].forEach(t => {
+  ['rutinas','biblioteca','clientes','dieta','historial'].forEach(t => {
     document.getElementById(`nav-${t}`).classList.toggle('active', t === tab);
   });
   document.getElementById('rutinas-panel').classList.toggle('hidden', tab !== 'rutinas');
@@ -656,6 +733,8 @@ window.adminTab = function(tab) {
   if (tab === 'biblioteca') renderLibrary();
   if (tab === 'clientes')   { renderClients(); populateWeekSelect(); }
   if (tab === 'dieta')      renderDietAdmin();
+  if (tab === 'historial')  renderHistorial();
+  document.getElementById('historial-panel').classList.toggle('hidden', tab !== 'historial');
 };
 // ── ADMIN RENDER ──────────────────────────────
 function renderAdmin() { renderAdminWeekList(); renderWeekEditor(); populateWeekSelect(); }
@@ -1386,6 +1465,193 @@ window.closeFoodDd = function(key) {
   if (dd) { dd.classList.add('hidden'); dd.innerHTML=''; }
 };
 // ─────────────────────────────────────────────────────────────
+
+// ════════════════════════════════════════════════════
+//  BIBLIOTECA — BÚSQUEDA Y FILTRO
+// ════════════════════════════════════════════════════
+const LIB_CATS = ['Todas','Espalda','Pecho','Pierna','Glúteo','Hombro','Brazo','Core','Movilidad','Plioméria','Estabilidad','Full Body'];
+let libActiveCat = 'Todas';
+
+function initLibCats() {
+  const el = document.getElementById('lib-cats');
+  if (!el) return;
+  el.innerHTML = LIB_CATS.map(c =>
+    `<button class="lib-cat-btn ${c===libActiveCat?'active':''}" onclick="setLibCat('${c}')">${c}</button>`
+  ).join('');
+}
+
+window.setLibCat = function(cat) {
+  libActiveCat = cat;
+  initLibCats();
+  filterLibrary();
+};
+
+window.filterLibrary = function() {
+  const q   = (document.getElementById('lib-search')?.value || '').toLowerCase().trim();
+  const cat = libActiveCat;
+  const items = Object.entries(library);
+
+  const filtered = items.filter(([id, v]) => {
+    const matchName = !q || (v.name||'').toLowerCase().includes(q);
+    const matchCat  = cat === 'Todas' || (v.muscle||'').toLowerCase().includes(cat.toLowerCase());
+    return matchName && matchCat;
+  });
+
+  const grid = document.getElementById('lib-grid');
+  if (!grid) return;
+
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="lib-empty">No hay vídeos que coincidan con la búsqueda.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(([id, v]) => `
+    <div class="lib-card">
+      <div class="lib-card-thumb">
+        ${v.url ? `<iframe src="${ytEmbed(v.url)}" allowfullscreen title="${esc(v.name)}"></iframe>` : '🎥'}
+      </div>
+      <div class="lib-card-info">
+        <div class="lib-card-name">${esc(v.name)}</div>
+        <div class="lib-card-muscle">${esc(v.muscle)||'Sin categoría'}</div>
+        <div class="lib-card-actions">
+          <button class="btn-lib-copy" onclick="copyLibUrl('${esc(v.url)}')">Copiar URL</button>
+          <button class="btn btn-danger" style="font-size:11px;padding:4px 10px" onclick="delLibVideo('${id}')">✕</button>
+        </div>
+      </div>
+    </div>`).join('');
+};
+
+// Override renderLibrary to also init cats and filter
+const _origRenderLibrary = renderLibrary;
+function renderLibrary() {
+  _origRenderLibrary();
+  initLibCats();
+  // Apply active filter if any
+  const q = (document.getElementById('lib-search')?.value || '').trim();
+  if (q || libActiveCat !== 'Todas') filterLibrary();
+}
+
+// ════════════════════════════════════════════════════
+//  HISTORIAL DE CHECKS
+// ════════════════════════════════════════════════════
+async function renderHistorial() {
+  const el   = document.getElementById('hist-list');
+  const tag  = document.getElementById('hist-tag');
+  const entries = Object.entries(clients);
+  if (tag) tag.textContent = entries.length + ' cliente' + (entries.length !== 1 ? 's' : '');
+
+  if (!entries.length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:14px">Aún no hay clientes.</div>';
+    return;
+  }
+
+  el.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:12px 0">Cargando datos...</div>';
+
+  // Load all check data for all clients in parallel
+  const clientsData = await Promise.all(entries.map(async ([uid, c]) => {
+    const snap = await get(ref(db, `trainflow/checks/${uid}`));
+    return { uid, client: c, checks: snap.val() || {} };
+  }));
+
+  el.innerHTML = clientsData.map(({ uid, client, checks }) => {
+    const avatar = client.avatar || '😊';
+    const weeks  = appData.weeks || [];
+
+    // Calculate global completion %
+    let totalEx = 0, totalDone = 0;
+    weeks.forEach((w, wi) => {
+      (w.days || []).forEach((day, di) => {
+        if (day.rest) return;
+        const allExs = (day.blocks || []).flatMap(b => b.exercises || []);
+        if (!allExs.length) return;
+        const key    = `w${wi}_d${di}`;
+        const dayChecks = checks[key] || {};
+        totalEx   += allExs.length;
+        totalDone += Object.values(dayChecks).filter(Boolean).length;
+      });
+    });
+    const globalPct = totalEx ? Math.round((totalDone / totalEx) * 100) : 0;
+
+    // Build per-week/day breakdown
+    const weeksHtml = weeks.map((w, wi) => {
+      const daysHtml = (w.days || []).map((day, di) => {
+        if (day.rest) return '';
+        const allExs = (day.blocks || []).flatMap(b => b.exercises || []);
+        if (!allExs.length) return '';
+        const key       = `w${wi}_d${di}`;
+        const dayChecks = checks[key] || {};
+        const done      = Object.values(dayChecks).filter(Boolean).length;
+        const pct       = Math.round((done / allExs.length) * 100);
+        const color     = pct === 100 ? 'var(--accent)' : pct >= 50 ? '#f5a623' : 'var(--red)';
+        return `<div class="hist-day-row">
+          <div class="hist-day-name">${DAYS_SHORT[di]}</div>
+          <div class="hist-day-track"><div class="hist-day-fill" style="width:${pct}%;background:${color}"></div></div>
+          <div class="hist-day-pct">${done}/${allExs.length}</div>
+        </div>`;
+      }).join('');
+      if (!daysHtml.trim()) return '';
+      return `<div class="hist-week-title">${esc(w.label)}</div>${daysHtml}`;
+    }).join('');
+
+    return `<div class="hist-client-card" id="hcc-${uid}">
+      <div class="hist-client-top" onclick="toggleHistClient('${uid}')">
+        <div class="hist-avatar-sm">${avatar}</div>
+        <div class="hist-client-info">
+          <div class="hist-client-name">${esc(client.name)}</div>
+          <div class="hist-client-email">${esc(client.email)}</div>
+        </div>
+        <div class="hist-global-pct">${globalPct}%</div>
+        <div class="hist-chevron">▾</div>
+      </div>
+      <div class="hist-detail">
+        ${weeksHtml || '<div class="hist-no-data">Sin datos de entreno todavía.</div>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.toggleHistClient = function(uid) {
+  document.getElementById('hcc-'+uid)?.classList.toggle('open');
+};
+
+// ════════════════════════════════════════════════════
+//  AVATARES
+// ════════════════════════════════════════════════════
+const AVATARS = [
+  '🏋️','🤸','🚴','🏃','⚽','🥊','🏊','🧘','🤼','💪',
+  '🦾','🔥','⚡','🌟','🎯','🦅','🐆','🦁','🐺','🦊',
+  '😤','😎','🥷','🧗','🏇'
+];
+
+window.openAvatarModal = function() {
+  if (!currentUser) return;
+  const grid = document.getElementById('avatar-grid');
+  const current = document.getElementById('c-avatar')?.textContent || '😊';
+  grid.innerHTML = AVATARS.map(a =>
+    `<div class="avatar-opt ${a===current?'selected':''}" onclick="selectAvatar('${a}')">${a}</div>`
+  ).join('');
+  document.getElementById('avatar-modal').classList.remove('hidden');
+};
+
+window.selectAvatar = function(avatar) {
+  if (!currentUser) return;
+  // Update UI immediately
+  const ab = document.getElementById('c-avatar');
+  if (ab) ab.textContent = avatar;
+  // Save to Firebase
+  update(ref(db, `trainflow/clients/${currentUser.uid}`), { avatar });
+  // Update selected state in grid
+  document.querySelectorAll('.avatar-opt').forEach(el => {
+    el.classList.toggle('selected', el.textContent === avatar);
+  });
+  setTimeout(() => closeAvatarModal(), 300);
+  toast('Avatar actualizado ✓');
+};
+
+window.closeAvatarModal = function() {
+  document.getElementById('avatar-modal').classList.add('hidden');
+};
+// ════════════════════════════════════════════════════
 // ════════════════════════════════════════════════════
 </script>
 </body>
